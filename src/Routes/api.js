@@ -7,10 +7,7 @@ const message = require("../Controllers/messageController");
 const portfolio = require("../Controllers/portfolioController");
 const product = require("../Controllers/productController");
 
-// Add a catch-all route for undefined routes
-router.get('*', (req, res) => {
-    res.status(404).json({ status: 'error', message: 'Route not found' });
-  });
+
 
 // Create Blog API
 router.get("/blog/create", blogController.create);

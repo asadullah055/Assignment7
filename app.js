@@ -24,7 +24,6 @@ app.use(helmet());
 app.use(hpp());
 app.use(cors());
 app.use(expressMongoSanitize());
-
 const limiter = rateLimit({
   windowMs: 20 * 60 * 1000, 
   max: 100, 
@@ -33,6 +32,11 @@ app.use(limiter);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 app.use('/',routers);
+// Add a catch-all route for undefined routes
+app.use('*', (req, res) => {
+  res.status(404).json({ status: 'error', message: 'Route not found' });
+});
 
 module.exports=app;
